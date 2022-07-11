@@ -209,7 +209,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const footer = await getFooter(preview);
   const header = await getHeader(preview);
   const categories = await getCategories();
-  const { items } = await getAllPosts();
+  const { items } = await getAllPosts(preview);
   const data = await getPage({ slug: 'blog', relations: '' }, preview);
 
   // await generateRSS(items);
