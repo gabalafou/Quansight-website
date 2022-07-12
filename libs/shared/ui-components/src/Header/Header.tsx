@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { DomainVariant } from '@quansight/shared/types';
 import { DeviceSizeVariant, useDeviceSize } from '@quansight/shared/utils';
 
-import PreviewModeAlert from '../PreviewModeAlert/PreviewModeAlert';
+import PreviewModeBanner from '../PreviewModeBanner/PreviewModeBanner';
 import { HeaderSkipLinks } from './Common/HeaderSkipLinks';
 import { HeaderDesktop } from './HeaderDesktop/HeaderDesktop';
 import { HeaderMobile } from './HeaderMobile/HeaderMobile';
@@ -28,7 +28,9 @@ export const Header: FC<THeaderProps> = ({
         domainVariant === DomainVariant.Labs && 'bg-black',
       )}
     >
-      <PreviewModeAlert preview={preview} />
+      {process.env['NODE_ENV'] !== 'production' && (
+        <PreviewModeBanner preview={preview} />
+      )}
       <div className="mx-auto max-w-layout">
         <HeaderSkipLinks skipLinksText={skipLinksText} />
         {deviceSize === DeviceSizeVariant.Mobile && (
