@@ -16,7 +16,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
 
   // For safety and simplicity, do not allow preview mode banner in production,
   // only dev and preview/staging.
-  if (process.env['NODE_ENV'] === 'production') {
+  if (process.env['NEXT_PUBLIC_VERCEL_ENV'] === 'production') {
     return null;
   }
 
