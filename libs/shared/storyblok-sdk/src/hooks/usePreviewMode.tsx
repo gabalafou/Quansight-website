@@ -10,9 +10,8 @@ import { useRouter } from 'next/router';
 // - a bunch of query string parameters that all begin with `_storyblok`.
 // So this is essentially checking if the site is loaded in
 // the Storyblok editor preview iframe.
-export const isStoryblok = () =>
-  typeof window !== 'undefined' &&
-  window.location.search.includes('_storyblok');
+export const isStoryblok = (loc: { search: string }) =>
+  loc.search.includes('_storyblok');
 
 export const usePreviewMode = (
   // isPreviewMode comes from getStaticProps (Next.js preview mode feature)
@@ -21,7 +20,7 @@ export const usePreviewMode = (
   const { reload } = useRouter();
 
   useEffect(() => {
-    if (!isPreviewMode && isStoryblok()) {
+    if (!isPreviewMode && isStoryblok(window.location)) {
       console.log('/api/enter-preview');
       fetch(`/api/enter-preview`).then(reload);
     }
