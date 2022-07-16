@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { useStoryblok } from '@quansight/shared/storyblok-sdk';
+import { usePreviewMode, useStoryblok } from '@quansight/shared/storyblok-sdk';
 import {
   Page as PageUIComponent,
   TPageProps as TPageUIComponentProps,
@@ -21,6 +21,8 @@ export const Page: FC<TPageProps> = ({
   children,
   relations = '',
 }) => {
+  usePreviewMode(preview);
+
   const handlePageItemLoad = async (slug: string): Promise<PageItem> => {
     const pageItem = getPage({ slug, relations }, preview);
     return pageItem;

@@ -9,7 +9,7 @@ import type { TPreviewModeBannerProps } from './types';
 export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
   const [showExitPreviewLink, setShowExitPreviewLink] = useState(true);
   useEffect(() => {
-    if (isStoryblok()) {
+    if (isStoryblok(window.location)) {
       setShowExitPreviewLink(false);
     }
   }, [setShowExitPreviewLink]);
@@ -27,8 +27,12 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
     </a>
   );
 
+  const className =
+    'py-2 text-xl text-center text-black ' +
+    (preview ? 'bg-[rgb(255,255,0)]' : 'bg-green');
+
   return (
-    <div className="py-2 text-xl text-center text-black bg-[rgb(255,255,0)]">
+    <div className={className}>
       {preview ? (
         <>
           This page is in content preview mode. You can see published{' '}
