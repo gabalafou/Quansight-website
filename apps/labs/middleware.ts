@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { isStoryblok } from '@quansight/shared/storyblok-sdk';
-
 function fromStoryblok(request: NextRequest): boolean {
   const referrer = request.headers.get('referer');
   if (!referrer) {
@@ -24,7 +22,7 @@ function enterPreview(request: NextRequest): NextResponse {
   }
 
   const isPreview = request.cookies.has('__next_preview_data');
-  if (!isPreview && isStoryblok(request.nextUrl)) {
+  if (!isPreview) {
     const url = request.nextUrl.clone();
     url.pathname = '/api/enter-preview';
     url.search = url.search +=
